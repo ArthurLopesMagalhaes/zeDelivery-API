@@ -7,7 +7,7 @@ type CoverageAreaType = {
 
 type AddressType = {
   type: string;
-  cordinates: number[];
+  coordinates: number[];
 };
 
 export type PartnerType = {

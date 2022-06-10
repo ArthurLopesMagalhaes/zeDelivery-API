@@ -19,14 +19,12 @@ export const addAction = checkSchema({
     optional: true,
   },
   "coverageArea.coordinates": {
-    matches: {
-      options: [
-        /\[\[\[\[[^\]]*\],.*\[[^\]]*\],.*\[[^\]]*\],.*\[[^\]]*\]].*,/i,
-        "g",
-      ],
-    },
+    // matches: {
+    //   options: [/\[\[\[\[[^\]]*\],.*\[[^\]]*\],.*\[[^\]]*\],.*\[[^\]]*\]].*,/i],
+    //   errorMessage: "Wrong pattern",
+    // },
     notEmpty: true,
-    errorMessage: "Coverage area is required / Wrong pattern",
+    errorMessage: "Coverage area is required",
   },
   "address.type": {
     optional: true,

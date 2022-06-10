@@ -10,16 +10,20 @@ export const ping = async (req: Request, res: Response) => {
 export const addPartner = async (req: Request, res: Response) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log(errors);
     return res.status(400).json({ error: errors.mapped() });
   }
-
-  const data = matchedData(req);
-  console.log(data);
-  const body = req.body;
+  const { tradingName, ownerName, document } = req.body;
+  const coverageArea: number[][][][] = req.body.coverageArea;
+  const address: number[] = req.body.address;
 
   try {
-    const newPartner = await partnerService.createPartner(body);
+    const newPartner = await partnerService.createPartner(
+      tradingName,
+      ownerName,
+      document,
+      coverageArea,
+      address
+    );
 
     if (newPartner instanceof Error) {
       return res.json({ error: newPartner.message });
@@ -33,7 +37,6 @@ export const addPartner = async (req: Request, res: Response) => {
 
 export const getPartner = async (req: Request, res: Response) => {
   const id = req.query.id as string;
-  console.log(id);
 
   try {
     const partner = await partnerService.findPartnerById(id);
@@ -47,4 +50,18 @@ export const getPartner = async (req: Request, res: Response) => {
   }
 };
 
-export const getClosestPartner = async (req: Request, res: Response) => {};
+export const getClosestPartner = async (req: Request, res: Response) => {
+  const long = Number(req.query.long);
+  const lat = Number(req.query.lat);
+
+  try {
+    const partner = await partnerService.findClosestPartner(long, lat);
+    if (partner instanceof Error) {
+      return res.json({ error: partner.message });
+    }
+
+    return res.json({ partner });
+  } catch (error) {
+    return res.json({ error });
+  }
+};

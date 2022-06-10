@@ -12,6 +12,6 @@ router.post(
   PartnerValidation.addAction,
   PartnerController.addPartner
 );
-router.get("/partnerr", PartnerController.getClosestPartner);
+router.get("/closestpartner", PartnerController.getClosestPartner);
 
 export default router;
