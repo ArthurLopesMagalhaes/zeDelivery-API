@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/ping", PartnerController.ping);
 
-router.get("/partner", PartnerController.getPartner);
+router.get("/partner/:id", PartnerController.getPartner);
 router.post(
   "/partner",
   PartnerValidation.addAction,

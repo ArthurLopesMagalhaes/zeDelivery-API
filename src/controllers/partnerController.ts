@@ -36,7 +36,8 @@ export const addPartner = async (req: Request, res: Response) => {
 };
 
 export const getPartner = async (req: Request, res: Response) => {
-  const id = req.query.id as string;
+  const id = req.params.id as string;
+  console.log(id);
 
   try {
     const partner = await partnerService.findPartnerById(id);
